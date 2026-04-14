@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>รวมลิงก์ระบบงาน – Ruangchai Phonput</title>
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@300;400;500;600&family=Kanit:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+:root{
+  --bg:#080d17;--bg2:#0f1623;--bg3:#141e30;
+  --card:#111827;--card2:#1a2540;
+  --border:rgba(255,255,255,0.07);--border2:rgba(255,255,255,0.13);
+  --text:#e8f0ff;--muted:#7a90b8;--muted2:#4a5e7a;
+  --accent:#4f8cff;--accent2:#7eb3ff;
+  --teal:#2de8c8;--gold:#f5c842;--purple:#a78bfa;--rose:#fb7185;--amber:#fbbf24;
+  --r:14px;
+}
+html{scroll-behavior:smooth;}
+body{font-family:'Sarabun',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;}
+
+/* stars */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse at 10% 20%,rgba(79,140,255,0.13) 0%,transparent 50%),
+    radial-gradient(ellipse at 90% 80%,rgba(167,139,250,0.09) 0%,transparent 45%),
+    radial-gradient(ellipse at 55% 5%,rgba(45,232,200,0.07) 0%,transparent 35%);
+}
+.star{position:fixed;border-radius:50%;background:#fff;pointer-events:none;animation:twinkle var(--d,3s) var(--delay,0s) infinite alternate;}
+@keyframes twinkle{from{opacity:0.1;}to{opacity:0.6;}}
+
+/* ─── HERO ─── */
+.hero{
+  position:relative;z-index:1;
+  padding:52px 24px 0;
+  text-align:center;
+}
+.rocket-orbit{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:100px;height:100px;border-radius:50%;
+  position:relative;margin-bottom:28px;
+}
+.rocket-orbit::before{
+  content:'';position:absolute;inset:0;border-radius:50%;
+  border:1px dashed rgba(79,140,255,0.2);
+  animation:spin 22s linear infinite;
+}
+.rocket-orbit::after{
+  content:'';position:absolute;inset:8px;border-radius:50%;
+  background:linear-gradient(135deg,rgba(79,140,255,0.15),rgba(45,232,200,0.1));
+  border:1.5px solid rgba(79,140,255,0.25);
+  box-shadow:0 0 40px rgba(79,140,255,0.15),inset 0 1px 0 rgba(255,255,255,0.08);
+}
+@keyframes spin{to{transform:rotate(360deg);}}
+.rocket-svg{position:relative;z-index:1;filter:drop-shadow(0 0 16px rgba(79,140,255,0.7));}
+.rocket-dot{
+  position:absolute;width:7px;height:7px;border-radius:50%;
+  background:var(--teal);box-shadow:0 0 8px var(--teal);
+  top:8px;left:50%;margin-left:42px;
+  animation:orbit 22s linear infinite;
+  transform-origin:-42px 42px;
+}
+@keyframes orbit{to{transform:rotate(360deg);}}
+
+.hero-title{
+  font-family:'Kanit',sans-serif;
+  font-size:clamp(28px,5vw,46px);
+  font-weight:700;
+  background:linear-gradient(125deg,#fff 20%,var(--accent2) 55%,var(--teal) 90%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  letter-spacing:-0.02em;line-height:1.15;margin-bottom:6px;
+}
+.hero-name-th{
+  font-family:'Sarabun',sans-serif;font-size:16px;font-weight:400;
+  color:var(--muted);margin-bottom:28px;letter-spacing:0.02em;
+}
+.hero-chips{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.chip{
+  display:inline-flex;align-items:center;gap:8px;
+  background:rgba(255,255,255,0.04);
+  border:1px solid var(--border2);border-radius:40px;
+  padding:8px 20px;font-size:13px;font-weight:500;color:var(--text);
+}
+.chip-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+
+.glow-line{
+  height:1px;max-width:560px;margin:0 auto 44px;
+  background:linear-gradient(90deg,transparent 0%,rgba(79,140,255,0.45) 35%,rgba(45,232,200,0.35) 65%,transparent 100%);
+}
+
+/* ─── CAT NAV ─── */
+.cat-nav{
+  display:flex;gap:6px;flex-wrap:wrap;justify-content:center;
+  padding:0 20px;margin-bottom:36px;position:relative;z-index:1;
+}
+.cat-pill{
+  padding:7px 18px;border-radius:40px;border:1px solid var(--border2);
+  background:var(--card);color:var(--muted);
+  font-family:'Sarabun',sans-serif;font-size:13px;font-weight:500;
+  cursor:pointer;transition:all .22s;
+}
+.cat-pill:hover{color:var(--text);border-color:var(--accent);}
+.cat-pill.active{background:rgba(79,140,255,0.15);color:var(--accent2);border-color:rgba(79,140,255,0.4);}
+
+/* ─── MAIN ─── */
+.main{max-width:1080px;margin:0 auto;padding:0 20px 80px;position:relative;z-index:1;}
+
+/* toolbar */
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:28px;align-items:center;}
+.search-wrap{
+  flex:1;min-width:200px;
+  display:flex;align-items:center;gap:10px;
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:12px;padding:0 16px;transition:border .2s;
+}
+.search-wrap:focus-within{border-color:var(--accent);}
+.search-wrap svg{width:16px;height:16px;fill:var(--muted);flex-shrink:0;}
+.search-wrap input{
+  border:none;outline:none;
+  font-family:'Sarabun',sans-serif;font-size:14px;
+  background:transparent;padding:11px 0;flex:1;color:var(--text);
+}
+.search-wrap input::placeholder{color:var(--muted2);}
+.btn{
+  display:inline-flex;align-items:center;gap:7px;
+  padding:10px 20px;border-radius:10px;border:none;
+  font-family:'Sarabun',sans-serif;font-size:13px;font-weight:600;
+  cursor:pointer;transition:all .22s;white-space:nowrap;
+}
+.btn-accent{background:linear-gradient(135deg,#3a76e8,var(--accent));color:#fff;box-shadow:0 3px 14px rgba(79,140,255,0.22);}
+.btn-accent:hover{transform:translateY(-2px);box-shadow:0 6px 22px rgba(79,140,255,0.38);}
+.btn-ghost{background:var(--card);color:var(--muted);border:1.5px solid var(--border2);}
+.btn-ghost:hover{background:var(--card2);color:var(--text);border-color:var(--accent);}
+.btn-sm{padding:7px 14px;font-size:12px;border-radius:8px;}
+
+/* import */
+.import-box{
+  background:var(--card);border:1.5px solid var(--border2);
+  border-radius:var(--r);padding:18px 20px;margin-bottom:26px;
+}
+.import-tabs{display:flex;gap:4px;margin-bottom:14px;border-bottom:1px solid var(--border);padding-bottom:10px;flex-wrap:wrap;}
+.itab{padding:6px 16px;border-radius:8px;border:none;background:transparent;font-family:'Sarabun',sans-serif;font-size:12px;font-weight:500;color:var(--muted);cursor:pointer;transition:all .2s;}
+.itab.active{background:rgba(79,140,255,0.15);color:var(--accent2);border:1px solid rgba(79,140,255,0.25);}
+.import-panel{display:none;}.import-panel.active{display:block;}
+.import-panel textarea{
+  width:100%;background:var(--bg2);border:1.5px solid var(--border);
+  border-radius:10px;padding:10px 14px;
+  font-family:'Sarabun',sans-serif;font-size:13px;color:var(--text);
+  outline:none;resize:vertical;min-height:80px;transition:border .2s;
+}
+.import-panel textarea:focus{border-color:var(--accent);}
+.import-panel textarea::placeholder{color:var(--muted2);}
+.file-drop{
+  border:1.5px dashed rgba(79,140,255,0.28);border-radius:10px;
+  padding:24px;text-align:center;cursor:pointer;transition:all .2s;
+  color:var(--muted);font-size:13px;
+}
+.file-drop:hover{border-color:var(--accent);background:rgba(79,140,255,0.05);}
+.file-drop svg{width:26px;height:26px;fill:var(--muted);display:block;margin:0 auto 8px;}
+.import-panel input[type=file]{display:none;}
+.import-info{font-size:12px;color:var(--muted);background:rgba(79,140,255,0.06);border:1px solid rgba(79,140,255,0.14);border-radius:8px;padding:8px 12px;margin-bottom:10px;line-height:1.8;}
+.import-info strong{color:var(--accent2);}
+.import-actions{display:flex;gap:8px;margin-top:10px;align-items:center;flex-wrap:wrap;}
+.import-hint{font-size:11px;color:var(--muted2);flex:1;}
+
+/* section */
+.section-block{margin-bottom:36px;}
+.section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px;padding-bottom:10px;border-bottom:1px solid var(--border);}
+.sec-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
+.sec-title{font-family:'Kanit',sans-serif;font-size:17px;font-weight:600;color:var(--text);}
+.sec-count{background:var(--card2);border:1px solid var(--border);color:var(--muted);font-size:11px;padding:2px 10px;border-radius:20px;}
+
+/* grid */
+.card-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(295px,1fr));gap:14px;}
+
+/* link card */
+.lcard{
+  background:var(--card);border:1.5px solid var(--border);
+  border-radius:var(--r);overflow:hidden;
+  transition:all .25s;
+  animation:fadeUp .4s both;
+}
+.lcard:nth-child(2){animation-delay:.05s;}.lcard:nth-child(3){animation-delay:.1s;}
+.lcard:nth-child(4){animation-delay:.13s;}.lcard:nth-child(5){animation-delay:.16s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px);}to{opacity:1;transform:translateY(0);}}
+.lcard:hover{
+  border-color:rgba(79,140,255,0.38);
+  box-shadow:0 8px 32px rgba(0,0,0,0.4),0 0 0 1px rgba(79,140,255,0.1);
+  transform:translateY(-4px);
+}
+.lcard-bar{height:3px;}
+.lcard-body{padding:16px 18px 10px;}
+.lcard-id{font-size:10px;font-weight:700;letter-spacing:0.1em;color:var(--muted2);margin-bottom:8px;font-family:'Kanit',sans-serif;}
+.lcard-cat{
+  display:inline-flex;align-items:center;gap:5px;
+  font-size:10px;font-weight:700;letter-spacing:0.06em;
+  padding:3px 10px;border-radius:20px;margin-bottom:10px;
+}
+.lcard-name{
+  font-family:'Kanit',sans-serif;font-size:14.5px;font-weight:600;
+  color:var(--text);margin-bottom:5px;line-height:1.45;
+}
+.lcard-url{
+  font-size:11px;color:var(--muted2);
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;
+  margin-bottom:0;
+}
+.lcard-foot{
+  padding:10px 18px 14px;
+  display:flex;gap:7px;align-items:center;
+  border-top:1px solid var(--border);
+  margin-top:12px;
+}
+.btn-launch{
+  background:rgba(79,140,255,0.12);color:var(--accent2);
+  border:1px solid rgba(79,140,255,0.25);
+  padding:7px 16px;border-radius:8px;
+  font-size:12px;font-weight:600;cursor:pointer;
+  font-family:'Sarabun',sans-serif;transition:all .2s;
+  text-decoration:none;display:inline-flex;align-items:center;gap:5px;
+}
+.btn-launch:hover{background:rgba(79,140,255,0.22);border-color:var(--accent);color:#fff;transform:translateY(-1px);}
+.btn-edit-c{background:transparent;color:var(--muted);border:1px solid var(--border);padding:7px 11px;border-radius:8px;font-size:11px;cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .2s;}
+.btn-edit-c:hover{background:var(--card2);color:var(--text);}
+.btn-del-c{background:transparent;color:rgba(251,113,133,0.6);border:1px solid rgba(251,113,133,0.15);padding:7px 10px;border-radius:8px;font-size:11px;cursor:pointer;font-family:'Sarabun',sans-serif;transition:all .2s;margin-left:auto;}
+.btn-del-c:hover{background:rgba(251,113,133,0.1);color:var(--rose);}
+
+.empty-state{grid-column:1/-1;text-align:center;padding:56px;color:var(--muted2);}
+.empty-state svg{width:48px;height:48px;fill:var(--border2);display:block;margin:0 auto 12px;}
+
+/* modal */
+.modal-bg{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.72);backdrop-filter:blur(8px);z-index:300;align-items:center;justify-content:center;padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--bg2);border:1.5px solid var(--border2);border-radius:18px;padding:28px;width:100%;max-width:500px;box-shadow:0 24px 60px rgba(0,0,0,0.55);border-top:3px solid var(--accent);}
+.modal h3{font-family:'Kanit',sans-serif;font-size:20px;font-weight:600;color:var(--text);margin-bottom:22px;}
+.form-group{margin-bottom:15px;}
+.form-group label{display:block;font-size:11px;font-weight:700;letter-spacing:0.07em;color:var(--muted);margin-bottom:6px;text-transform:uppercase;}
+.form-group input{width:100%;background:var(--bg);border:1.5px solid var(--border2);border-radius:10px;padding:10px 14px;font-family:'Sarabun',sans-serif;font-size:14px;color:var(--text);outline:none;transition:border .2s;}
+.form-group input:focus{border-color:var(--accent);}
+.form-group input::placeholder{color:var(--muted2);}
+.modal-actions{display:flex;gap:10px;justify-content:flex-end;margin-top:22px;}
+
+/* cat colors */
+.bc0{background:linear-gradient(90deg,var(--accent),var(--teal));}
+.bc1{background:linear-gradient(90deg,var(--teal),#06b6d4);}
+.bc2{background:linear-gradient(90deg,var(--gold),var(--amber));}
+.bc3{background:linear-gradient(90deg,var(--purple),#c084fc);}
+.bc4{background:linear-gradient(90deg,var(--rose),#f97316);}
+.bc5{background:linear-gradient(90deg,#34d399,#10b981);}
+.bc6{background:linear-gradient(90deg,var(--amber),#f59e0b);}
+.bc7{background:linear-gradient(90deg,#818cf8,#6366f1);}
+.cc0{background:rgba(79,140,255,0.12);color:#7eb3ff;}
+.cc1{background:rgba(45,232,200,0.12);color:#2de8c8;}
+.cc2{background:rgba(245,200,66,0.12);color:#f5c842;}
+.cc3{background:rgba(167,139,250,0.12);color:#c4b5fd;}
+.cc4{background:rgba(251,113,133,0.12);color:#fda4af;}
+.cc5{background:rgba(52,211,153,0.12);color:#6ee7b7;}
+.cc6{background:rgba(251,191,36,0.12);color:#fcd34d;}
+.cc7{background:rgba(129,140,248,0.12);color:#a5b4fc;}
+.dc0{background:#4f8cff;}.dc1{background:#2de8c8;}.dc2{background:#f5c842;}
+.dc3{background:#a78bfa;}.dc4{background:#fb7185;}.dc5{background:#34d399;}
+.dc6{background:#fbbf24;}.dc7{background:#818cf8;}
+
+/* toast */
+.toast{position:fixed;bottom:28px;right:28px;background:var(--bg2);color:var(--text);border:1px solid var(--border2);border-left:3px solid var(--accent);padding:12px 22px;border-radius:12px;font-size:14px;font-family:'Sarabun',sans-serif;z-index:999;opacity:0;transform:translateY(16px);transition:all .3s;pointer-events:none;box-shadow:0 8px 24px rgba(0,0,0,0.45);}
+.toast.show{opacity:1;transform:translateY(0);}
+
+.footer{text-align:center;padding:22px;font-size:11px;color:var(--muted2);border-top:1px solid var(--border);position:relative;z-index:1;letter-spacing:0.03em;}
+
+@media(max-width:600px){
+  .hero{padding:36px 16px 0;}
+  .main{padding:0 12px 60px;}
+  .card-grid{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<!-- stars -->
+<div class="star" style="width:2px;height:2px;top:8%;left:12%;--d:4s;--delay:0.5s;"></div>
+<div class="star" style="width:1px;height:1px;top:15%;left:78%;--d:3s;--delay:1s;"></div>
+<div class="star" style="width:2px;height:2px;top:30%;left:92%;--d:5s;--delay:0.2s;"></div>
+<div class="star" style="width:1px;height:1px;top:60%;left:5%;--d:3.5s;--delay:1.5s;"></div>
+<div class="star" style="width:2px;height:2px;top:75%;left:88%;--d:4.5s;--delay:0.8s;"></div>
+<div class="star" style="width:1px;height:1px;top:45%;left:55%;--d:6s;--delay:2s;"></div>
+<div class="star" style="width:2px;height:2px;top:22%;left:40%;--d:3.2s;--delay:0.3s;"></div>
+
+<!-- ═══ HERO ═══ -->
+<div class="hero">
+  <div class="rocket-orbit">
+    <div class="rocket-dot"></div>
+    <svg class="rocket-svg" width="52" height="52" viewBox="0 0 64 64" fill="none">
+      <ellipse cx="32" cy="57" rx="5.5" ry="8" fill="url(#fg)"/>
+      <ellipse cx="32" cy="55" rx="3" ry="5" fill="rgba(255,255,255,0.45)"/>
+      <path d="M32 5 C19 8 15 24 15 38 L49 38 C49 24 45 8 32 5Z" fill="url(#bg_)"/>
+      <path d="M32 5 C27 8 22 18 21 26 L43 26 C42 18 37 8 32 5Z" fill="url(#ng)"/>
+      <circle cx="32" cy="31" r="6.5" fill="url(#wg)"/>
+      <circle cx="30.5" cy="29.5" r="2.5" fill="rgba(255,255,255,0.22)"/>
+      <path d="M15 38 L6 52 L19 45 Z" fill="url(#fg2)"/>
+      <path d="M49 38 L58 52 L45 45 Z" fill="url(#fg2)"/>
+      <rect x="20" y="38" width="24" height="5" rx="2" fill="url(#bg2_)"/>
+      <path d="M27 14 Q29 12 31 19 Q29 21 27 14Z" fill="rgba(255,255,255,0.28)"/>
+      <defs>
+        <linearGradient id="bg_" x1="15" y1="5" x2="49" y2="43" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#93c5fd"/>
+          <stop offset="100%" stop-color="#2563a8"/>
+        </linearGradient>
+        <linearGradient id="ng" x1="21" y1="5" x2="43" y2="26" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#bfdbfe"/>
+          <stop offset="100%" stop-color="#60a5fa"/>
+        </linearGradient>
+        <linearGradient id="fg2" x1="6" y1="38" x2="58" y2="52" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#2de8c8"/>
+          <stop offset="100%" stop-color="#4f8cff"/>
+        </linearGradient>
+        <radialGradient id="wg" cx="40%" cy="35%" r="65%">
+          <stop offset="0%" stop-color="#e0f2fe"/>
+          <stop offset="100%" stop-color="#3b82f6"/>
+        </radialGradient>
+        <linearGradient id="bg2_" x1="20" y1="38" x2="44" y2="43" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#3b82f6"/>
+          <stop offset="100%" stop-color="#1d4ed8"/>
+        </linearGradient>
+        <linearGradient id="fg" x1="27" y1="49" x2="37" y2="65" gradientUnits="userSpaceOnUse">
+          <stop offset="0%" stop-color="#fde68a"/>
+          <stop offset="40%" stop-color="#f97316"/>
+          <stop offset="100%" stop-color="#ef4444" stop-opacity="0.3"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  </div>
+
+  <div class="hero-title">Ruangchai Phonput</div>
+  <div class="hero-name-th">รวมลิงก์ระบบงานทั้งหมด</div>
+
+  <div class="hero-chips">
+    <div class="chip">
+      <div class="chip-dot" style="background:var(--teal);box-shadow:0 0 6px var(--teal);"></div>
+      <span id="chipTotal">16 ระบบ</span>
+    </div>
+    <div class="chip">
+      <div class="chip-dot" style="background:var(--gold);box-shadow:0 0 6px var(--gold);"></div>
+      <span id="chipCat">3 หมวดหมู่</span>
+    </div>
+    <div class="chip">
+      <div class="chip-dot" style="background:var(--purple);box-shadow:0 0 6px var(--purple);"></div>
+      <span>สสพ.กรุงเทพ พื้นที่ 1</span>
+    </div>
+  </div>
+</div>
+
+<div class="glow-line"></div>
+
+<!-- CAT NAV -->
+<div class="cat-nav" id="catNav">
+  <button class="cat-pill active" data-cat="all" onclick="filterCat('all',this)">ทั้งหมด</button>
+</div>
+
+<!-- ═══ MAIN ═══ -->
+<div class="main">
+
+  <!-- IMPORT -->
+  <div class="import-box">
+    <div class="import-tabs">
+      <button class="itab active" onclick="switchTab('csv')">📋 วาง CSV</button>
+      <button class="itab" onclick="switchTab('file')">📁 อัปโหลดไฟล์</button>
+      <button class="itab" onclick="switchTab('help')">❓ วิธีใช้</button>
+    </div>
+    <div class="import-panel active" id="panel-csv">
+      <div class="import-info">
+        <strong>ดึงจาก Google Sheet:</strong> ไฟล์ → ดาวน์โหลด → CSV → เปิดด้วย Notepad → คัดลอกวางด้านล่าง<br/>
+        รูปแบบ: <strong>ชื่อระบบ, URL, หมวดหมู่, หมายเหตุ</strong>
+      </div>
+      <textarea id="csvText" placeholder="ชื่อระบบ,https://...,หมวดหมู่,หมายเหตุ&#10;Gmail,https://mail.google.com,สื่อสาร,..."></textarea>
+      <div class="import-actions">
+        <span class="import-hint">รองรับ CSV มีหรือไม่มี header</span>
+        <button class="btn btn-accent btn-sm" onclick="importCSVText()">นำเข้าข้อมูล</button>
+      </div>
+    </div>
+    <div class="import-panel" id="panel-file">
+      <div class="file-drop" onclick="document.getElementById('fileInput').click()" id="fileDrop">
+        <svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8l-6-6zm4 18H6V4h7v5h5v11z"/></svg>
+        คลิกหรือลากไฟล์ CSV มาวางที่นี่
+        <small style="display:block;margin-top:5px;font-size:11px;opacity:.55;">รองรับ .csv และ .txt</small>
+      </div>
+      <input type="file" id="fileInput" accept=".csv,.txt" onchange="importFile(event)"/>
+    </div>
+    <div class="import-panel" id="panel-help">
+      <div class="import-info" style="margin:0;line-height:2;">
+        <strong>วิธีนำเข้าจาก Google Sheets:</strong><br/>
+        1. เปิด Sheet → <strong>ไฟล์ → ดาวน์โหลด → CSV (.csv)</strong><br/>
+        2. แท็บ "อัปโหลดไฟล์" → เลือกไฟล์ที่ดาวน์โหลดมา<br/>
+        3. หรือเปิดด้วย Notepad → Ctrl+A → Ctrl+C → วางในแท็บ "วาง CSV"<br/>
+        <strong>รูปแบบคอลัมน์:</strong> A=ชื่อระบบ | B=URL | C=หมวดหมู่ | D=หมายเหตุ
+      </div>
+    </div>
+  </div>
+
+  <!-- TOOLBAR -->
+  <div class="toolbar">
+    <div class="search-wrap">
+      <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+      <input type="text" id="searchInput" placeholder="ค้นหาระบบงาน..." oninput="render()"/>
+    </div>
+    <button class="btn btn-accent" onclick="openAdd()">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19 13h-6v6h-2v-6H5v-2h6V5h2v6h6v2z"/></svg>
+      เพิ่มระบบ
+    </button>
+    <button class="btn btn-ghost" onclick="exportCSV()">
+      <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M9 16h6v-6h4l-7-7-7 7h4zm-4 2h14v-2H5z"/></svg>
+      CSV
+    </button>
+  </div>
+
+  <div id="allSections"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <h3 id="modalTitle">เพิ่มระบบงาน</h3>
+    <div class="form-group"><label>ชื่อระบบงาน *</label><input id="fName" placeholder="เช่น ระบบตรวจสอบ, Dashboard..."/></div>
+    <div class="form-group"><label>URL *</label><input id="fUrl" placeholder="https://..."/></div>
+    <div class="form-group"><label>หมวดหมู่</label><input id="fCat" placeholder="เช่น ระบบตรวจการ, Dashboard, เอกสาร..."/></div>
+    <div class="form-group"><label>หมายเหตุ</label><input id="fNote" placeholder="คำอธิบายสั้นๆ..."/></div>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" onclick="closeModal()">ยกเลิก</button>
+      <button class="btn btn-accent" onclick="saveLink()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M17 3H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V7l-4-4zm-5 16c-1.66 0-3-1.34-3-3s1.34-3 3-3 3 1.34 3 3-1.34 3-3 3zm3-10H5V5h10v4z"/></svg>
+        บันทึก
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div class="footer">Ruangchai Phonput · Link Hub · สำนักงานส่งเสริมสหกรณ์กรุงเทพมหานคร พื้นที่ 1</div>
+
+<script>
+const KEY = 'rp_links_v2';
+let links = [], editIdx = -1, activeCat = 'all';
+
+// ── ข้อมูลจริงจาก CSV ──
+const seedLinks = [
+  {id:'P01', name:'ระบบรายงานผลการตรวจการสหกรณ์',           url:'https://fat23p-eng.github.io/InspecterReport/',    cat:'ระบบตรวจการ',      note:''},
+  {id:'P02', name:'ระบบตรวจสอบวาระกรรมการ (หน่วยงาน)',      url:'https://boardchecker.netlify.app/',               cat:'ระบบตรวจการ',      note:''},
+  {id:'P03', name:'ติดตามงาน e-Project Demo',                url:'https://docs.google.com/spreadsheets/d/1ky8x2ug1F9zWSCGtY-Vy4ofx9RLxuf_Sprnx8zhwz2U/edit?usp=sharing', cat:'Google Sheet', note:'ติดตามงานโครงการ'},
+  {id:'P04', name:'ระบบติดตามผลการเบิกจ่าย สสพ.1',          url:'https://script.google.com/macros/s/AKfycbwbvC0dVGSs4vI2fxSBKveYHkY4IoVaEWGxJiOCgCEhDgw3wbU9TLU20n5yLTw-NDKYSw/exec', cat:'การเงิน', note:'ระบบหลัก'},
+  {id:'P05', name:'ระบบติดตามผลการเบิกจ่าย (ต้นแบบ)',       url:'https://script.google.com/macros/s/AKfycbxkUfUYxaLPLq8HVHXXHXrqOCxJ2dQepK-kl4pToY4jcelh6lh69G8snE91k_zkcSEaSw/exec', cat:'การเงิน', note:'ต้นแบบทดสอบ'},
+  {id:'P06', name:'Budget Dashboard Demo',                    url:'https://docs.google.com/spreadsheets/d/1hZJWL3W5VwpIYnYQtmoN8R8zyrg9wtldHq-FfkehobA/edit?usp=sharing', cat:'Google Sheet', note:'แดชบอร์ดงบประมาณ'},
+  {id:'P07', name:'Template ตรวจสอบวาระกรรมการ (Mu)',        url:'https://docs.google.com/spreadsheets/d/1F99nc6NBTtjBiBkDoUYfaHPO2nt6ZCQKZZerRKYc3E0/edit?gid=0#gid=0', cat:'Google Sheet', note:''},
+  {id:'P08', name:'ระบบประเมินคุณภาพการควบคุมภายใน',        url:'https://fat23p-eng.github.io/internalcontrol/',    cat:'ระบบตรวจการ',      note:''},
+  {id:'P09', name:'ระบบติดตามผลการปฏิบัติงาน Action Plan',  url:'https://fat23p-eng.github.io/ActionPlan_report/', cat:'ระบบตรวจการ',      note:''},
+  {id:'P10', name:'โปรแกรมตรวจสอบข้อบังคับและระเบียบสหกรณ์',url:'https://fat23p-eng.github.io/regulationchecker/', cat:'ระบบตรวจการ',      note:''},
+  {id:'P11', name:'Dashboard ทะเบียนรับจดข้อบังคับสหกรณ์',  url:'https://regulationdashboard.netlify.app/',        cat:'Dashboard',        note:''},
+  {id:'P12', name:'Dashboard จัดชั้นสหกรณ์เข้มแข็ง (กรม)',  url:'https://platformcoopstrong.netlify.app/',         cat:'Dashboard',        note:'ระดับกรม'},
+  {id:'P13', name:'Dashboard จัดชั้นสหกรณ์เข้มแข็ง สสพ.1', url:'https://coopstronger-new.netlify.app/',           cat:'Dashboard',        note:'สสพ.1'},
+  {id:'P14', name:'Dashboard ให้ความเห็นชอบระเบียบสหกรณ์',  url:'https://confirminlaw.netlify.app/',               cat:'Dashboard',        note:''},
+  {id:'P15', name:'Dashboard รับทราบระเบียบสหกรณ์',          url:'https://inlawdashboard.netlify.app/',             cat:'Dashboard',        note:''},
+  {id:'P16', name:'ระบบตรวจสอบวาระกรรมการ (Github)',        url:'https://fat23p-eng.github.io/boardtermchecker/', cat:'ระบบตรวจการ',      note:''},
+];
+
+const CC = ['cc0','cc1','cc2','cc3','cc4','cc5','cc6','cc7'];
+const BC = ['bc0','bc1','bc2','bc3','bc4','bc5','bc6','bc7'];
+const DC = ['dc0','dc1','dc2','dc3','dc4','dc5','dc6','dc7'];
+let catMap = {}, catN = 0;
+function cIdx(cat){ if(!cat)return 0; if(catMap[cat]===undefined)catMap[cat]=catN++%8; return catMap[cat]; }
+
+function load(){
+  try{ const d=localStorage.getItem(KEY); links=d?JSON.parse(d):seedLinks.map(l=>({...l})); }
+  catch(e){ links=seedLinks.map(l=>({...l})); }
+  catMap={}; catN=0;
+  links.forEach(l=>{ if(l.cat) cIdx(l.cat); });
+}
+function save(){ localStorage.setItem(KEY,JSON.stringify(links)); }
+function toast(msg){
+  const t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),2500);
+}
+function categories(){ return[...new Set(links.map(l=>l.cat).filter(Boolean))]; }
+
+function filterCat(cat,btn){
+  activeCat=cat;
+  document.querySelectorAll('.cat-pill').forEach(p=>p.classList.remove('active'));
+  if(btn) btn.classList.add('active');
+  render();
+}
+
+function buildCatNav(){
+  const cats=categories();
+  const nav=document.getElementById('catNav');
+  nav.innerHTML=`<button class="cat-pill ${activeCat==='all'?'active':''}" data-cat="all" onclick="filterCat('all',this)">ทั้งหมด</button>`;
+  cats.forEach(cat=>{
+    const b=document.createElement('button');
+    b.className='cat-pill'+(activeCat===cat?' active':'');
+    b.textContent=cat;
+    b.onclick=function(){ filterCat(cat,this); };
+    nav.appendChild(b);
+  });
+}
+
+function render(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  const filtered=links.filter(l=>{
+    const mq=!q||(l.name||'').toLowerCase().includes(q)||(l.url||'').toLowerCase().includes(q)||(l.note||'').toLowerCase().includes(q)||(l.cat||'').toLowerCase().includes(q);
+    const mc=activeCat==='all'||l.cat===activeCat;
+    return mq&&mc;
+  });
+
+  buildCatNav();
+  document.getElementById('chipTotal').textContent=links.length+' ระบบ';
+  document.getElementById('chipCat').textContent=categories().length+' หมวดหมู่';
+
+  const cats=activeCat==='all'
+    ?[...new Set(filtered.map(l=>l.cat||'(ไม่มีหมวดหมู่)'))]
+    :[activeCat];
+
+  const container=document.getElementById('allSections');
+  if(!filtered.length){
+    container.innerHTML=`<div class="empty-state"><svg viewBox="0 0 24 24"><path d="M11 15h2v2h-2zm0-8h2v6h-2zm.99-5C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/></svg><p>ไม่พบระบบที่ตรงกัน</p></div>`;
+    return;
+  }
+
+  container.innerHTML=cats.map(cat=>{
+    const items=filtered.filter(l=>(l.cat||'(ไม่มีหมวดหมู่)')===cat);
+    if(!items.length)return '';
+    const ci=cIdx(cat);
+    return`<div class="section-block">
+      <div class="section-head">
+        <div class="sec-dot ${DC[ci]}"></div>
+        <div class="sec-title">${cat}</div>
+        <div class="sec-count">${items.length} ระบบ</div>
+      </div>
+      <div class="card-grid">
+        ${items.map(l=>{
+          const ri=links.indexOf(l);
+          const ci2=cIdx(l.cat);
+          const domain=getDomain(l.url);
+          return`<div class="lcard">
+            <div class="lcard-bar ${BC[ci2]}"></div>
+            <div class="lcard-body">
+              ${l.id?`<div class="lcard-id">${l.id}</div>`:''}
+              <div class="lcard-cat ${CC[ci2]}">${l.cat||'ทั่วไป'}</div>
+              <div class="lcard-name">${l.name||'(ไม่มีชื่อ)'}</div>
+              <div class="lcard-url" title="${l.url}">${domain}</div>
+              ${l.note?`<div style="font-size:11.5px;color:var(--muted);border-left:2px solid rgba(79,140,255,0.3);padding-left:8px;margin-top:6px;">${l.note}</div>`:''}
+            </div>
+            <div class="lcard-foot">
+              <a class="btn-launch" href="${l.url}" target="_blank" rel="noopener">
+                <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M19 19H5V5h7V3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7h-2v7zM14 3v2h3.59l-9.83 9.83 1.41 1.41L19 6.41V10h2V3h-7z"/></svg>
+                เปิดระบบ
+              </a>
+              <button class="btn-edit-c" onclick="openEdit(${ri})">แก้ไข</button>
+              <button class="btn-del-c" onclick="delLink(${ri})">ลบ</button>
+            </div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function getDomain(url){
+  try{
+    const u=new URL(url);
+    if(u.hostname==='docs.google.com') return 'Google Sheets / Docs';
+    if(u.hostname==='script.google.com') return 'Google Apps Script';
+    if(u.hostname.endsWith('netlify.app')) return u.hostname;
+    if(u.hostname.endsWith('github.io')) return u.hostname+u.pathname;
+    return u.hostname;
+  }catch(e){ return url.substring(0,40)+'...'; }
+}
+
+function openAdd(){
+  editIdx=-1;
+  document.getElementById('modalTitle').textContent='เพิ่มระบบงาน';
+  ['fName','fUrl','fCat','fNote'].forEach(id=>document.getElementById(id).value='');
+  document.getElementById('modalBg').classList.add('open');
+}
+function openEdit(i){
+  editIdx=i;const l=links[i];
+  document.getElementById('modalTitle').textContent='แก้ไขระบบงาน';
+  document.getElementById('fName').value=l.name||'';
+  document.getElementById('fUrl').value=l.url||'';
+  document.getElementById('fCat').value=l.cat||'';
+  document.getElementById('fNote').value=l.note||'';
+  document.getElementById('modalBg').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalBg').classList.remove('open'); }
+function saveLink(){
+  const name=document.getElementById('fName').value.trim();
+  const url=document.getElementById('fUrl').value.trim();
+  if(!name||!url){alert('กรุณากรอกชื่อและ URL');return;}
+  const obj={name,url,cat:document.getElementById('fCat').value.trim(),note:document.getElementById('fNote').value.trim()};
+  if(editIdx>=0) links[editIdx]=obj; else links.push(obj);
+  save();closeModal();render();
+  toast(editIdx>=0?'แก้ไขเรียบร้อย ✓':'เพิ่มระบบเรียบร้อย ✓');
+}
+function delLink(i){
+  if(!confirm(`ลบ "${links[i].name}" ออกจากรายการ?`))return;
+  links.splice(i,1);save();render();toast('ลบเรียบร้อย');
+}
+function exportCSV(){
+  const rows=[['ID','ชื่อระบบงาน','URL','หมวดหมู่','หมายเหตุ'],...links.map(l=>[l.id||'',l.name,l.url,l.cat,l.note])];
+  const csv=rows.map(r=>r.map(c=>`"${(c||'').replace(/"/g,'""')}"`).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href='data:text/csv;charset=utf-8,\uFEFF'+encodeURIComponent(csv);
+  a.download='ruangchai_links.csv';a.click();
+  toast('ส่งออก CSV เรียบร้อย');
+}
+
+// ── import ──
+function switchTab(name){
+  document.querySelectorAll('.itab').forEach((t,i)=>t.classList.toggle('active',['csv','file','help'][i]===name));
+  document.querySelectorAll('.import-panel').forEach(p=>p.classList.remove('active'));
+  document.getElementById('panel-'+name).classList.add('active');
+}
+function parseCSVRows(text){
+  const lines=text.split(/\r?\n/).map(l=>l.trim()).filter(Boolean);
+  const results=[];
+  for(const line of lines){
+    const cols=[];let cur='',inQ=false;
+    for(let i=0;i<line.length;i++){
+      const ch=line[i];
+      if(ch==='"'){inQ=!inQ;}
+      else if(ch===','&&!inQ){cols.push(cur.trim());cur='';}
+      else{cur+=ch;}
+    }
+    cols.push(cur.trim());
+    const[name='',url='',cat='',note='']=cols;
+    const skip=['ชื่อระบบ','name','ชื่อ','name_system','caseid'].map(s=>s.toLowerCase());
+    if(skip.includes(name.toLowerCase()))continue;
+    if(name||url) results.push({name,url,cat,note});
+  }
+  return results;
+}
+function importCSVText(){
+  const text=document.getElementById('csvText').value.trim();
+  if(!text){alert('กรุณาวางข้อมูล CSV ก่อน');return;}
+  const imported=parseCSVRows(text);
+  if(!imported.length){alert('ไม่พบข้อมูล\nตรวจสอบรูปแบบ: ชื่อ,URL,หมวดหมู่,หมายเหตุ');return;}
+  if(confirm(`พบ ${imported.length} รายการ ต้องการนำเข้าหรือไม่?`)){
+    links.push(...imported);save();render();
+    document.getElementById('csvText').value='';
+    toast(`นำเข้า ${imported.length} รายการเรียบร้อย ✓`);
+  }
+}
+function importFile(e){
+  const file=e.target.files[0];if(!file)return;
+  const reader=new FileReader();
+  reader.onload=function(ev){
+    let text=ev.target.result;
+    if(text.charCodeAt(0)===0xFEFF) text=text.slice(1);
+    const imported=parseCSVRows(text);
+    if(!imported.length){alert('ไม่พบข้อมูลในไฟล์');return;}
+    if(confirm(`พบ ${imported.length} รายการจาก "${file.name}"\nต้องการนำเข้าหรือไม่?`)){
+      links.push(...imported);save();render();
+      toast(`นำเข้า ${imported.length} รายการเรียบร้อย ✓`);
+    }
+  };
+  reader.readAsText(file,'UTF-8');e.target.value='';
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  const drop=document.getElementById('fileDrop');
+  drop.addEventListener('dragover',e=>{e.preventDefault();drop.style.borderColor='var(--accent)';drop.style.background='rgba(79,140,255,0.06)';});
+  drop.addEventListener('dragleave',()=>{drop.style.borderColor='';drop.style.background='';});
+  drop.addEventListener('drop',e=>{
+    e.preventDefault();drop.style.borderColor='';drop.style.background='';
+    const file=e.dataTransfer.files[0];if(!file)return;
+    importFile({target:{files:[file],value:''}});
+  });
+});
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target===document.getElementById('modalBg'))closeModal();});
+
+load();render();
+</script>
+</body>
+</html>
